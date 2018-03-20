@@ -2,13 +2,34 @@ version: "3"
 
 services:
   jenkins:
+    image: infra/jenkins
     build:
       context: jenkins
     ports:
       - 8080:8080
       - 50000:50000
+    links:
+      - jenkins-node
+      - jenkins-node-android
+      - jenkins-node-ios
     volumes:
           - "jenkins-data:/var/jenkins_home"
+
+  jenkins-node:
+    image: infra/jenkins-node
+    build:
+      context: jenkins-node
+
+  jenkins-node-android:
+    image: infra/jenkins-node-android
+    build:
+      context: jenkins-node-android
+
+  jenkins-node-ios:
+    image: infra/jenkins-node-ios
+    image: jenkins/jnlp-slave
+    #build:
+    #  context: jenkins-node-ios
 
 volumes:
   jenkins-data:
