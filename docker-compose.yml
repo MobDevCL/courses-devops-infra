@@ -10,5 +10,10 @@ services:
     volumes:
           - "jenkins-data:/var/jenkins_home"
 
+  travis:
+    image: gitlab/gitlab-ce
+    ports:
+      - 8081:80
+
 volumes:
   jenkins-data:
